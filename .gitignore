@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Editor and OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Generated backups and logs
+app_original.py
+rolefit_app_backup_*.py
+*.log
+
+# Test and coverage artefacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local data and secrets
+jobs_dataset.csv
+.env
+.streamlit/secrets.toml
+
+# Generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+rolefit_app_backup_*.py
+
+# Local job data
+jobs_dataset.csv
+
+# Temporary development scripts and backups
+inspection.txt
+integrate_transformer.py
+prepare_transformer_upgrade.py
+rolefit_app_before_transformer.py
+rolefit_app_backup_*.py
+
+.agents/
