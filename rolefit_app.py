@@ -100,33 +100,297 @@ def safe_value(value, fallback="Not specified"):
     return value if value else fallback
 
 
+
+
 st.markdown("""
 <style>
-    .stApp { background: #10151c; }
-    [data-testid="stSidebar"] { background: #171f29; }
-    h1, h2, h3 { letter-spacing: -0.5px; }
+:root {
+    --ivory: #FAF6F2;
+    --rose: #E8CDD4;
+    --rose-light: #F3E5E8;
+    --burgundy: #783F52;
+    --burgundy-hover: #603142;
+    --text: #38252B;
+    --muted: #75666B;
+    --border: #E7D8DC;
+    --white: #FFFFFF;
+}
+
+.stApp {
+    background: var(--ivory);
+    color: var(--text);
+}
+
+[data-testid="stHeader"] {
+    background: rgba(250, 246, 242, 0.96);
+}
+
+[data-testid="stSidebar"] {
+    background: var(--rose-light);
+    border-right: 1px solid var(--border);
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text);
+}
+
+h1, h2, h3, p, label {
+    color: var(--text);
+}
+
+.hero {
+    padding: 2rem 2.2rem;
+    border: 1px solid #DDBFC8;
+    border-radius: 20px;
+    background: linear-gradient(125deg, #E8CDD4 0%, #F3E5E8 100%);
+    margin-bottom: 1.6rem;
+    box-shadow: 0 8px 24px rgba(91, 48, 64, 0.07);
+}
+
+.hero h1 {
+    color: var(--text);
+    font-size: 2.5rem;
+    font-weight: 750;
+}
+
+.hero p {
+    color: #513B43;
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.muted {
+    color: #604750;
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+
+.job-card {
+    padding: 1.35rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin: 0.85rem 0;
+    background: var(--white);
+    box-shadow: 0 5px 18px rgba(65, 37, 46, 0.05);
+}
+
+.score {
+    font-size: 1.55rem;
+    font-weight: 750;
+    color: var(--burgundy);
+}
+
+div.stButton > button,
+div.stDownloadButton > button {
+    background: var(--burgundy);
+    color: var(--white);
+    border: 1px solid var(--burgundy);
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+div.stButton > button:hover,
+div.stDownloadButton > button:hover {
+    background: var(--burgundy-hover);
+    color: var(--white);
+    border-color: var(--burgundy-hover);
+}
+
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+    background: var(--white) !important;
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    border-radius: 8px;
+}
+
+div[data-baseweb="input"] > div,
+div[data-baseweb="textarea"] > div,
+div[data-baseweb="select"] > div {
+    background: var(--white) !important;
+    color: var(--text) !important;
+    border-color: #D7BEC5 !important;
+    border-radius: 9px;
+}
+
+div[data-baseweb="select"] *,
+div[data-baseweb="popover"] *,
+ul[role="listbox"] * {
+    color: var(--text) !important;
+}
+
+div[data-testid="stMetric"] {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 14px;
+}
+
+input, textarea {
+    caret-color: var(--burgundy);
+}
+
+hr {
+    border-color: var(--border);
+}
+
+a {
+    color: var(--burgundy);
+}
+
+@media (max-width: 768px) {
     .hero {
-        padding: 1.5rem 1.7rem;
-        border: 1px solid #354454;
-        border-radius: 18px;
-        background: linear-gradient(120deg, #1b2b36, #17212c);
-        margin-bottom: 1.2rem;
+        padding: 1.4rem;
     }
-    .muted { color: #aab7c4; }
+    .hero h1 {
+        font-size: 2rem;
+    }
     .job-card {
-        padding: 1.1rem;
-        border: 1px solid #354454;
-        border-radius: 14px;
-        margin: 0.7rem 0;
-        background: #171f29;
+        padding: 1rem;
     }
-    .score {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #6ee7b7;
-    }
+}
+/* Force readable light form controls */
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] textarea,
+[data-testid="stSidebar"] [data-baseweb="select"] > div,
+[data-testid="stSidebar"] [data-baseweb="input"] > div,
+[data-testid="stSidebar"] [data-baseweb="textarea"] > div {
+    background-color: #FFFFFF !important;
+    color: #38252B !important;
+    border-color: #D7BEC5 !important;
+}
+
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] textarea {
+    -webkit-text-fill-color: #38252B !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] *,
+[data-testid="stSidebar"] [data-baseweb="popover"] *,
+[data-testid="stSidebar"] [role="listbox"] * {
+    color: #38252B !important;
+}
+
+[data-testid="stSidebar"] input::placeholder,
+[data-testid="stSidebar"] textarea::placeholder {
+    color: #75666B !important;
+    -webkit-text-fill-color: #75666B !important;
+}
+
+/* Replace bright red accents with burgundy */
+[data-testid="stSidebar"] [role="radiogroup"] label > div:first-child,
+[data-testid="stSidebar"] [data-baseweb="checkbox"] > div {
+    accent-color: #783F52 !important;
+}
+
+[data-testid="stSidebar"] [role="radiogroup"] label,
+[data-testid="stSidebar"] [data-testid="stSlider"] {
+    accent-color: #783F52 !important;
+}
+
+/* Pink controls with black text */
+[data-testid="stSidebar"] [data-baseweb="select"] > div {
+    background-color: #E8CDD4 !important;
+    border-color: #D5AEBB !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] > div *,
+[data-testid="stSidebar"] [data-baseweb="select"] input {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] svg {
+    fill: #000000 !important;
+    color: #000000 !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="popover"],
+[data-testid="stSidebar"] [role="listbox"] {
+    background-color: #F3E5E8 !important;
+}
+
+[data-testid="stSidebar"] [role="option"] {
+    background-color: #F3E5E8 !important;
+    color: #000000 !important;
+}
+
+[data-testid="stSidebar"] [role="option"]:hover {
+    background-color: #E8CDD4 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
+    background-color: #783F52 !important;
+    border-color: #783F52 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stCheckbox"] label,
+[data-testid="stSidebar"] [role="radiogroup"] label {
+    color: #000000 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stCheckbox"] input,
+[data-testid="stSidebar"] [role="radio"] {
+    accent-color: #783F52 !important;
+}
+/* Fix dark dropdown shells */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background: #E8CDD4 !important;
+    border: 1px solid #D5AEBB !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stSidebar"] div[data-baseweb="select"] input {
+    background: transparent !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-testid="stSidebar"] div[data-baseweb="select"] span {
+    color: #000000 !important;
+}
+
+[data-testid="stSidebar"] div[data-baseweb="select"] svg {
+    fill: #000000 !important;
+    color: #000000 !important;
+}
+
+/* Fix job posting buttons */
+.stApp div.stButton > button,
+.stApp div.stLinkButton > a,
+.stApp div[data-testid="stLinkButton"] a {
+    background: #E8CDD4 !important;
+    color: #000000 !important;
+    border: 1px solid #D5AEBB !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+
+.stApp div.stButton > button:hover,
+.stApp div.stLinkButton > a:hover,
+.stApp div[data-testid="stLinkButton"] a:hover {
+    background: #DDBFC8 !important;
+    color: #000000 !important;
+    border-color: #B994A3 !important;
+}
+
+/* Make slider accents match the theme */
+.stApp [data-testid="stSlider"] [role="slider"] {
+    background: #783F52 !important;
+    border-color: #783F52 !important;
+}
+
+/* Keep checkbox labels readable */
+[data-testid="stSidebar"] [data-testid="stCheckbox"] label {
+    color: #000000 !important;
+}
+
+
 </style>
 """, unsafe_allow_html=True)
+
+
 
 st.markdown("""
 <div class="hero">
